@@ -43,7 +43,8 @@ The insights derived from Exploratory Data Analysis (EDA) are used to build an i
 - Pandas & NumPy  
 - Matplotlib & Seaborn  
 - Plotly  
-- Streamlit  
+- Streamlit
+- SQL 
 
 ---
 
