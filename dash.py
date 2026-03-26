@@ -2,14 +2,9 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# ==============================
-# 🎨 PAGE CONFIG
-# ==============================
+# PAGE CONFIG
 st.set_page_config(layout="wide")
 
-# ==============================
-# 🎨 CUSTOM CSS (POWER BI STYLE)
-# ==============================
 st.markdown("""
 <style>
 
@@ -62,19 +57,14 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ==============================
-# 📌 TITLE
-# ==============================
+# TITLE
 st.markdown('<div class="main-title">Customer Behavior Dashboard</div>', unsafe_allow_html=True)
 
-# ==============================
-# 📌 LOAD DATA
-# ==============================
-df = pd.read_csv("/home/ankit/code/customer/customers.csv")
+# LOAD DATA
+df = pd.read_csv("customers.csv")
 
-# ==============================
-# 📌 SIDEBAR FILTERS
-# ==============================
+#  SIDEBAR FILTERS
+
 st.sidebar.header("Filters")
 
 subscription = st.sidebar.multiselect("Subscription Status",
@@ -93,9 +83,8 @@ shipping = st.sidebar.multiselect("Shipping Type",
                                  df["shipping_type"].unique(),
                                  default=df["shipping_type"].unique())
 
-# ==============================
-# 📌 FILTER DATA
-# ==============================
+# FILTER DATA
+
 filtered_df = df[
     (df["subscription_status"].isin(subscription)) &
     (df["gender"].isin(gender)) &
@@ -107,9 +96,7 @@ if filtered_df.empty:
     st.warning("No data available")
     st.stop()
 
-# ==============================
-# 📌 KPI CARDS (WITH SPACING)
-# ==============================
+# KPI CARDS 
 col1, col2, col3 = st.columns(3, gap="large")
 
 with col1:
@@ -136,12 +123,10 @@ with col3:
     </div>
     """, unsafe_allow_html=True)
 
-# ==============================
-# 📊 CHARTS ROW 1 (WITH BOXES)
-# ==============================
+
 col4, col5, col6 = st.columns(3, gap="large")
 
-# 🔹 Subscription
+#  Subscription
 with col4:
     st.markdown('<div class="chart-box">', unsafe_allow_html=True)
     st.markdown('<div class="chart-title">% Customers by Subscription</div>', unsafe_allow_html=True)
@@ -155,7 +140,7 @@ with col4:
     st.plotly_chart(fig1, use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-# 🔹 Revenue by Category
+#  Revenue by Category
 with col5:
     st.markdown('<div class="chart-box">', unsafe_allow_html=True)
     st.markdown('<div class="chart-title">Revenue by Category</div>', unsafe_allow_html=True)
@@ -167,7 +152,7 @@ with col5:
     st.plotly_chart(fig2, use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-# 🔹 Sales by Category
+#  Sales by Category
 with col6:
     st.markdown('<div class="chart-box">', unsafe_allow_html=True)
     st.markdown('<div class="chart-title">Sales by Category</div>', unsafe_allow_html=True)
@@ -181,9 +166,7 @@ with col6:
     st.plotly_chart(fig3, use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-# ==============================
-# 📊 CHARTS ROW 2
-# ==============================
+
 col7, col8 = st.columns(2, gap="large")
 
 # 🔹 Revenue by Age
@@ -198,7 +181,7 @@ with col7:
     st.plotly_chart(fig4, use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-# 🔹 Sales by Age
+#  Sales by Age
 with col8:
     st.markdown('<div class="chart-box">', unsafe_allow_html=True)
     st.markdown('<div class="chart-title">Sales by Age Group</div>', unsafe_allow_html=True)
